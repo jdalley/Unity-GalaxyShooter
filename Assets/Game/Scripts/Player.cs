@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public bool canTripleShot;
-
+    
     [SerializeField]
     private GameObject _laserPrefab = null;
     [SerializeField]
     private GameObject _tripleShotPrefab = null;
     [SerializeField]
+    private GameObject _playerExplosionPrefab = null;
+    [SerializeField]
+    private GameObject _shieldGameObject = null;
+    [SerializeField]
     private float _speed = 5.0f;
+    [SerializeField]
+    private int _lives = 3;
+    [SerializeField]
+    private bool canTripleShot;
+    [SerializeField]
+    private bool shieldsActive;
     [SerializeField]
     private float _fireRate = 0.25f;
     private float _nextFire = 0.0f;
-
 
     // Start is called before the first frame update
     private void Start()
@@ -42,10 +50,12 @@ public class Player : MonoBehaviour
         transform.Translate(Vector3.right * _speed * horizontalInput * Time.deltaTime);
         transform.Translate(Vector3.up * _speed * verticalInput * Time.deltaTime);
 
+        var viewportPos = Camera.main.WorldToViewportPoint(transform.position);
+
         // Limit player from going above half screen, or below bottom of the screen.
-        if (transform.position.y > 0)
+        if (transform.position.y > 2.5)
         {
-            transform.position = new Vector3(transform.position.x, 0, 0);
+            transform.position = new Vector3(transform.position.x, 2.5f, 0);
         }
         else if (transform.position.y <= -4.25)
         {
@@ -79,6 +89,31 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Damage(int damage)
+    {
+        // Negate damage with shield
+        if (shieldsActive)
+        {
+            shieldsActive = false;
+            _shieldGameObject.SetActive(false);
+            return;
+        }
+
+        _lives -= damage;
+
+        if (_lives < 1)
+        {
+            Instantiate(_playerExplosionPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+    }
+
+    public void EnableShields()
+    {
+        shieldsActive = true;
+        _shieldGameObject.SetActive(true);
+    }
+
     public void TripleShotPowerupOn()
     {
         canTripleShot = true;
@@ -89,6 +124,18 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         canTripleShot = false;
+    }
+
+    public void SpeedBoostPowerupOn()
+    {
+        _speed *= 2.0f;
+        StartCoroutine(SpeedBoostPowerDownRoutine());
+    }
+
+    public IEnumerator SpeedBoostPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _speed /= 2.0f;
     }
 
 }
