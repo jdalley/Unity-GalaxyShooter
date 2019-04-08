@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    
     [SerializeField]
     private GameObject _laserPrefab = null;
     [SerializeField]
@@ -24,11 +23,19 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _fireRate = 0.25f;
     private float _nextFire = 0.0f;
+    private UIManager _uIManager = null;
 
     // Start is called before the first frame update
     private void Start()
     {
-        
+        transform.position = new Vector3(0, 0, 0);
+
+        _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
+        if (_uIManager is object)
+        {
+            _uIManager.UpdateLives(_lives);
+        }
     }
 
     // Update is called once per frame
@@ -100,6 +107,7 @@ public class Player : MonoBehaviour
         }
 
         _lives -= damage;
+        _uIManager.UpdateLives(_lives);
 
         if (_lives < 1)
         {

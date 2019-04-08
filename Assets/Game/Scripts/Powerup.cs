@@ -32,7 +32,7 @@ public class Powerup : MonoBehaviour
             return;
 
         var player = other.GetComponent<Player>();
-        if (player != null)
+        if (player is object)
         {
             if (_powerupId == 0)
             {

@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
         if (other.tag == "Player")
         {
             var player = other.GetComponent<Player>();
-            if (player != null)
+            if (player is object)
             {
                 // Damage player
                 player.Damage(1);
