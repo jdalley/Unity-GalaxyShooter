@@ -64,11 +64,11 @@ Material:
     - _DetailNormalMapScale: 1
     - _Distfading: 68
     - _DstBlend: 0
-    - _Formuparam: 537.13
+    - _Formuparam: 530
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Iterations: 20
+    - _Iterations: 17
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -77,10 +77,10 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StepSize: 237.1
-    - _Tile: 740.3
+    - _StepSize: 130
+    - _Tile: 700
     - _UVSec: 0
-    - _Volsteps: 29.2
+    - _Volsteps: 20
     - _ZWrite: 1
     - _Zoom: 800
     m_Colors:
