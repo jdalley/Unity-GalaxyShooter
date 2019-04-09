@@ -24,13 +24,13 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.25f;
     private float _nextFire = 0.0f;
     private UIManager _uIManager = null;
+    private GameManager _gameManager = null;
 
     // Start is called before the first frame update
     private void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
-
         _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         if (_uIManager is object)
         {
@@ -112,6 +112,7 @@ public class Player : MonoBehaviour
         if (_lives < 1)
         {
             Instantiate(_playerExplosionPrefab, transform.position, Quaternion.identity);
+            _gameManager.GameOver();
             Destroy(gameObject);
         }
     }

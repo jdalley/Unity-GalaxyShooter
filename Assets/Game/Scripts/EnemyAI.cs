@@ -5,14 +5,17 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 1.0f;
+    private float _speed = 2.5f;
+    [SerializeField]
+    private int _scorePoints = 10;
     [SerializeField]
     private GameObject _enemyExplosionPrefab = null;
+    private UIManager _uIManager = null;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -37,16 +40,25 @@ public class EnemyAI : MonoBehaviour
             {
                 // Damage player
                 player.Damage(1);
-
-                Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                Destroyed();
             }
         }
         else if (other.tag == "Laser")
         {
             Destroy(other.gameObject);
-            Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+
+            if (_uIManager is object)
+            {
+                _uIManager.UpdateScore(_scorePoints);
+            }
+
+            Destroyed();
         }
+    }
+
+    private void Destroyed()
+    {
+        Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

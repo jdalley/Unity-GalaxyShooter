@@ -40,5 +40,4 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(6.0f);
         }
     }
-
 }
