@@ -8,9 +8,19 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyShipPrefab = null;
     [SerializeField]
     private GameObject[] _powerups = null;
+    [SerializeField]
+    private GameManager _gameManager = null;
 
     // Start is called before the first frame update
     private void Start()
+    {
+        if (_gameManager.gameStarted)
+        {
+            StartSpawns();
+        }
+    }
+
+    public void StartSpawns()
     {
         StartCoroutine(EnemySpawnRoutine());
         StartCoroutine(PowerupSpawnRoutine());
@@ -18,7 +28,7 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator EnemySpawnRoutine()
     {
-        while (true)
+        while (_gameManager.gameStarted)
         {
             Instantiate(_enemyShipPrefab,
                 new Vector3(Random.Range(-8.0f, 8.0f), 6, 0),
@@ -31,7 +41,7 @@ public class SpawnManager : MonoBehaviour
     private IEnumerator PowerupSpawnRoutine()
     {
         int numPowerups = _powerups.Length;
-        while (true)
+        while (_gameManager.gameStarted)
         {
             Instantiate(_powerups[Random.Range(0, numPowerups)],
                 new Vector3(Random.Range(-8.0f, 8.0f), 6, 0),

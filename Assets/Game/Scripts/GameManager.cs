@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public bool gameStarted = false;
-    public Player player = null;
+    [SerializeField]
+    private Player player = null;
+    [SerializeField]
+    private SpawnManager _spawnManager = null;
     private UIManager _uIManager = null;
 
     // Start is called before the first frame update
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         gameStarted = true;
         _uIManager.HideTitleScreen();
+        _spawnManager.StartSpawns();
 
         // Spawn player
         Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
