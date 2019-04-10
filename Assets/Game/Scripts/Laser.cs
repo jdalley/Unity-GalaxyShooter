@@ -10,7 +10,7 @@ public class Laser : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -18,7 +18,8 @@ public class Laser : MonoBehaviour
     {
         transform.Translate(Vector3.up * _speed * Time.deltaTime);
 
-        if (transform.position.y > 5.4)
+        // Destroy laser shots as they go above the top of the screen.
+        if (transform.position.y > Camera.main.orthographicSize)
         {
             if (transform.parent is object)
             {

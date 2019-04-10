@@ -24,10 +24,10 @@ public class EnemyAI : MonoBehaviour
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
         // When off the screen at the bottom, respawn at a random X point between bounds
-        if (transform.position.y <= -6.0)
+        if (transform.position.y <= _uIManager.screenYBottomEdge - 2)
         {
-            var xRnd = Random.Range(-9.0f, 9.0f);
-            transform.position = new Vector3(xRnd, 6.0f, 0);
+            var xRnd = Random.Range(_uIManager.screenXLeftEdge + 1, _uIManager.screenXRightEdge - 1);
+            transform.position = new Vector3(xRnd, _uIManager.screenYTopEdge + 2, 0);
         }
     }
 

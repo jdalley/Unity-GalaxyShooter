@@ -58,25 +58,27 @@ public class Player : MonoBehaviour
         transform.Translate(Vector3.up * _speed * verticalInput * Time.deltaTime);
 
         var viewportPos = Camera.main.WorldToViewportPoint(transform.position);
+        float playerYLimit = _uIManager.screenYTopEdge - 2;
+        float playerYBottom = _uIManager.screenYBottomEdge + 0.69f;
 
         // Limit player from going above half screen, or below bottom of the screen.
-        if (transform.position.y > 2.5)
+        if (transform.position.y > playerYLimit)
         {
-            transform.position = new Vector3(transform.position.x, 2.5f, 0);
+            transform.position = new Vector3(transform.position.x, playerYLimit, 0);
         }
-        else if (transform.position.y <= -4.25)
+        else if (transform.position.y <= playerYBottom)
         {
-            transform.position = new Vector3(transform.position.x, -4.25f, 0);
+            transform.position = new Vector3(transform.position.x, playerYBottom, 0);
         }
 
         // Wrap player left and right as they go off the screen
-        if (transform.position.x >= 10.7)
+        if (transform.position.x >= _uIManager.screenXRightEdge)
         {
-            transform.position = new Vector3(-10.7f, transform.position.y, 0);
+            transform.position = new Vector3(_uIManager.screenXLeftEdge, transform.position.y, 0);
         }
-        else if (transform.position.x <= -10.7)
+        else if (transform.position.x <= _uIManager.screenXLeftEdge)
         {
-            transform.position = new Vector3(10.7f, transform.position.y, 0);
+            transform.position = new Vector3(_uIManager.screenXRightEdge, transform.position.y, 0);
         }
     }
 

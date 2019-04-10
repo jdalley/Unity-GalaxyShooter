@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 634819397}
   - component: {fileID: 634819396}
   m_Layer: 0
-  m_Name: Spawn_Manager
+  m_Name: SpawnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 972832692}
   - component: {fileID: 972832693}
   m_Layer: 0
-  m_Name: SpaceBG_Overlay
+  m_Name: SpaceBGOverlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -548,7 +548,7 @@ GameObject:
   - component: {fileID: 998830101}
   - component: {fileID: 998830100}
   m_Layer: 5
-  m_Name: Score_Text
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 1486431714}
   - component: {fileID: 1486431713}
   m_Layer: 5
-  m_Name: Player_Lives
+  m_Name: PlayerLives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -797,6 +797,10 @@ MonoBehaviour:
   livesImage: {fileID: 1486431713}
   scoreText: {fileID: 998830100}
   score: 0
+  screenYTopEdge: 0
+  screenYBottomEdge: 0
+  screenXLeftEdge: 0
+  screenXRightEdge: 0
 --- !u!114 &1531936606
 MonoBehaviour:
   m_ObjectHideFlags: 0

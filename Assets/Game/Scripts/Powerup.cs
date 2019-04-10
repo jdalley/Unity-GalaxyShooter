@@ -12,7 +12,7 @@ public class Powerup : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -20,7 +20,8 @@ public class Powerup : MonoBehaviour
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-        if (transform.position.y < -6)
+        // Destroy powerups as they pass the bottom of the screen
+        if (transform.position.y < (-Camera.main.orthographicSize) - 1)
         {
             Destroy(gameObject);
         }
